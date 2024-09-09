@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace Arkanoid.Game
@@ -10,7 +9,6 @@ namespace Arkanoid.Game
         [SerializeField] private Rigidbody2D _rb;
         [SerializeField] private Vector2 _startDirection;
         [SerializeField] private float _speed = 10;
-        
 
         private bool _isStarted;
         private Platform _platform;
@@ -41,7 +39,6 @@ namespace Arkanoid.Game
 
         private void OnDrawGizmos()
         {
-
             if (!_isStarted)
             {
                 Gizmos.color = Color.green;
@@ -52,7 +49,6 @@ namespace Arkanoid.Game
                 Gizmos.color = Color.red;
                 Gizmos.DrawLine(transform.position, transform.position + (Vector3)_rb.velocity);
             }
-
         }
 
         #endregion

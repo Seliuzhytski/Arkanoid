@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f1f82e1cad443a4a1f259eec246a31e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _color: {r: 0, g: 0, b: 0, a: 1}
+  _sprites: []
   _spriteRenderer: {fileID: 0}
   _lives: 1
 --- !u!61 &863967738763804025

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace Arkanoid.Game
 {
@@ -6,25 +7,34 @@ namespace Arkanoid.Game
     {
         #region Variables
 
-        [SerializeField] private Color _color;
+        [SerializeField] private List<Sprite> _sprites;
         [SerializeField] private SpriteRenderer _spriteRenderer;
         [SerializeField] private int _lives = 1;
-
-        private bool _isHit;
 
         #endregion
 
         #region Unity lifecycle
 
-        private void OnCollisionEnter2D(Collision2D other)
+        private void OnCollisionEnter2D(Collision2D сCollision)
         {
-            if (!_isHit)
+            ApplyDamage();
+        }
+
+        #endregion
+
+        #region Private methods
+
+        private void ApplyDamage()
+        {
+            _lives--;
+            if (_lives < 1)
             {
-                _isHit = true;
-                _spriteRenderer.color = _color;
-                return;
+                Destroy(gameObject);
             }
-            Destroy(gameObject);
+            else
+            {
+                gameObject.GetComponentInChildren<SpriteRenderer>().sprite = _sprites[_lives - 1];
+            }
         }
 
         #endregion
