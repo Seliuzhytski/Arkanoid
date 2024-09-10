@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Arkanoid.Game
 {
@@ -9,6 +10,7 @@ namespace Arkanoid.Game
         [SerializeField] private Rigidbody2D _rb;
         [SerializeField] private Vector2 _startDirection;
         [SerializeField] private float _speed = 10;
+        private Ball _ball;
 
         private bool _isStarted;
         private Platform _platform;
@@ -36,6 +38,20 @@ namespace Arkanoid.Game
                 StartFlying();
             }
         }
+
+        private void OnCollisionEnter2D(Collision2D collision)
+        {
+            if (collision.gameObject.CompareTag("LoseZone"))
+            {
+                Destroy(gameObject);
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            }
+        }
+        
+        // private void OnTriggerEnter(Collider other) {
+        //     Destroy(other.gameObject);
+        //     SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        // }
 
         private void OnDrawGizmos()
         {
