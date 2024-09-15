@@ -132,7 +132,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _sprites:
   - {fileID: 21300000, guid: 8e5b573e171b83c43b7bedaf14ddb657, type: 3}
-  _spriteRenderer: {fileID: 0}
+  - {fileID: 21300000, guid: 9c0640e845c8769469e08fce1f86b4cf, type: 3}
+  _spriteRenderer: {fileID: 3748556277973930754}
   _lives: 2
 --- !u!58 &580653295204408982
 CircleCollider2D:

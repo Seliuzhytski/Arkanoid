@@ -49,7 +49,8 @@ MonoBehaviour:
   _sprites:
   - {fileID: 21300000, guid: eaba4651b4382df47aeea4fad1a4bf0b, type: 3}
   - {fileID: 21300000, guid: 9ae12f919b85db7419ad0478b699898a, type: 3}
-  _spriteRenderer: {fileID: 0}
+  - {fileID: 21300000, guid: ebf6b9a3d279d0b4194ed8e6f1a3f67d, type: 3}
+  _spriteRenderer: {fileID: 5567205937823877883}
   _lives: 3
 --- !u!60 &523241313018798857
 PolygonCollider2D:
