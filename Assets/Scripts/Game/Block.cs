@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Arkanoid.Services;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Arkanoid.Game
@@ -13,8 +12,12 @@ namespace Arkanoid.Game
         [SerializeField] private List<Sprite> _sprites;
         [SerializeField] private SpriteRenderer _spriteRenderer;
         [SerializeField] private int _lives = 1;
-        [SerializeField] private int _score = 0;
-        
+        [SerializeField] private int _score;
+        [SerializeField] private bool _isInvisible;
+
+        #endregion
+
+        #region Events
 
         public static event Action<Block> OnCreated;
         public static event Action<Block> OnDestroyed;
@@ -25,8 +28,14 @@ namespace Arkanoid.Game
 
         private void Start()
         {
+            if (_isInvisible)
+            {
+                _spriteRenderer.color = new Color(255, 255, 255, 0);
+                _lives++;
+            }
+
             OnCreated?.Invoke(this);
-            
+
             UpdateView();
         }
 
@@ -47,6 +56,11 @@ namespace Arkanoid.Game
 
         private void ApplyDamage()
         {
+            if (_isInvisible)
+            {
+                _spriteRenderer.color = new Color(255, 255, 255, 255);
+            }
+
             _lives--;
             if (_lives < 1)
             {

@@ -1,4 +1,5 @@
 ﻿using System;
+using Arkanoid.Game;
 using UnityEngine;
 
 namespace Arkanoid.Services
@@ -8,6 +9,11 @@ namespace Arkanoid.Services
         #region Variables
 
         [SerializeField] private int _score;
+        [SerializeField] private int _life = 3;
+
+        private Ball _ball;
+        private GameObject _gameOverScreen;
+        private Platform _platform;
 
         #endregion
 
@@ -19,6 +25,8 @@ namespace Arkanoid.Services
 
         #region Properties
 
+        public int Life => _life;
+
         public int Score => _score;
 
         #endregion
@@ -28,6 +36,8 @@ namespace Arkanoid.Services
         private void Start()
         {
             LevelService.Instance.OnAllBlocksDestroyed += AllBlocksDestroyedCallback;
+            _gameOverScreen = GameObject.FindWithTag("Finish");
+            _gameOverScreen.SetActive(false);
         }
 
         private void OnDestroy()
@@ -45,6 +55,23 @@ namespace Arkanoid.Services
             OnScoreChanged?.Invoke(_score);
         }
 
+        public void LoseLife()
+        {
+            _life--;
+
+            if (_life < 1)
+            {
+                GameOver();
+            }
+
+            _ball = FindObjectOfType<Ball>();
+            _platform = FindObjectOfType<Platform>();
+
+            _ball.IsStarted = false;
+            _ball.gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            _ball.gameObject.GetComponent<Rigidbody2D>().transform.position = _platform.transform.position;
+        }
+
         #endregion
 
         #region Private methods
@@ -52,6 +79,12 @@ namespace Arkanoid.Services
         private void AllBlocksDestroyedCallback()
         {
             SceneLoaderService.LoadNextLevelTest();
+        }
+
+        private void GameOver()
+        {
+            Time.timeScale = 0;
+            _gameOverScreen.SetActive(true);
         }
 
         #endregion

@@ -51,3 +51,6 @@ TagManager:
   - name: Ball
     uniqueID: 2144715527
     locked: 0
+  - name: GameOverWindow
+    uniqueID: 2368629257
+    locked: 0

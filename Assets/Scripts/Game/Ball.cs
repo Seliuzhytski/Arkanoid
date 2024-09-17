@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace Arkanoid.Game
 {
@@ -11,10 +10,11 @@ namespace Arkanoid.Game
         [SerializeField] private Vector2 _startDirection;
         [SerializeField] private float _speed = 10;
 
-        private bool _isStarted;
         private Platform _platform;
 
         #endregion
+
+        public bool IsStarted { get; set; }
 
         #region Unity lifecycle
 
@@ -25,7 +25,7 @@ namespace Arkanoid.Game
 
         private void Update()
         {
-            if (_isStarted)
+            if (IsStarted)
             {
                 return;
             }
@@ -40,7 +40,7 @@ namespace Arkanoid.Game
 
         private void OnDrawGizmos()
         {
-            if (!_isStarted)
+            if (!IsStarted)
             {
                 Gizmos.color = Color.green;
                 Gizmos.DrawLine(transform.position, transform.position + (Vector3)_startDirection);
@@ -65,7 +65,7 @@ namespace Arkanoid.Game
 
         private void StartFlying()
         {
-            _isStarted = true;
+            IsStarted = true;
             _rb.velocity = _startDirection.normalized * _speed;
         }
 
